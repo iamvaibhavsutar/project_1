@@ -1,27 +1,35 @@
 pipeline {
     agent any
     stages {
-        stage('Clone Repository') {
+        stage('Checkout SCM') {
             steps {
-			git credentialsId: 'jen_1', url: 'https://github.com/iamvaibhavsutar/project_1.git'
+                script {
+                    checkout scm: [
+                        $class: 'GitSCM',
+                        branches: [[name: '*/main']],  // Ensure 'main' is the correct branch
+                        userRemoteConfigs: [[url: 'https://github.com/iamvaibhavsutar/project_1.git']]
+                    ]
+                }
             }
         }
+        
+        // Add additional stages here, e.g., Build, Deploy
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t your-dockerhub-username/video-streaming:latest .'
+                // Your build steps here
             }
         }
+        
         stage('Push to Docker Hub') {
             steps {
-                sh 'docker login -u your-dockerhub-username -p your-password'
-                sh 'docker push your-dockerhub-username/video-streaming:latest'
+                // Your push steps here
             }
         }
+
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f deployment.yaml'
+                // Your deploy steps here
             }
         }
     }
 }
-
