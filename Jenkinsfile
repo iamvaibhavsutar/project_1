@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/your-repo/video-streaming.git'
+			git credentialsId: 'jen_1', url: 'https://github.com/iamvaibhavsutar/project_1.git'
             }
         }
         stage('Build Docker Image') {
