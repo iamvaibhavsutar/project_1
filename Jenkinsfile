@@ -15,7 +15,6 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                // Your build steps here, for example:
                 script {
                     echo 'Building Docker image...'
                     // Add actual Docker build command here
@@ -25,7 +24,6 @@ pipeline {
 
         stage('Push to Docker Hub') {
             steps {
-                // Your push steps here, for example:
                 script {
                     echo 'Pushing Docker image to Docker Hub...'
                     // Add actual Docker push command here
@@ -35,8 +33,11 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                // Your deploy steps here, for example:
                 script {
                     echo 'Deploying to Kubernetes...'
-                    // Add actual Kubernetes deploy command he
-
+                    // Add actual Kubernetes deploy command here
+                }
+            }
+        }
+    }
+}
